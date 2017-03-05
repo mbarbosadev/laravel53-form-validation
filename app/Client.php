@@ -11,4 +11,19 @@ class Client extends Model
     	2=>'Casado',
     	3=>'Divorciado'
     ];
+    
+    const PESSOA_FISICA = 'fisica';
+    const PESSOA_JURIDICA = 'juridica';
+    
+    protected $fillable = [
+    	'nome',
+    	'documento',
+    	'email',
+    	'telefone',
+    	'inadimplente',
+    	'data_nasc',
+    	'sexo',
+    	'estado_civil',
+    	'deficiencia_fisica'
+    ];
 }

@@ -30,10 +30,10 @@ $factory->define(App\Client::class, function (Faker\Generator $faker) {
 	$cpfs = cpfs();
 	
 	return [
-			'nome' => $faker->name,
-			'email' => $faker->email,
-			'telefone' => $faker->phoneNumber,
-			'inadimplente' => rand(0, 1),
+		'nome' => $faker->name,
+		'email' => $faker->email,
+		'telefone' => $faker->phoneNumber,
+		'inadimplente' => rand(0, 1),
 	];
 });
 	
@@ -47,7 +47,8 @@ $factory->state(\App\Client::class, 'pessoa_fisica', function(\Faker\Generator $
 		'data_nasc'=>$faker->date(),
 		'estado_civil'=>rand(1, 3),
 		'sexo'=>rand(1, 10) % 2 === 0 ? 'm' : 'f',
-		'deficiencia_fisica'=>$faker->word
+		'deficiencia_fisica'=>$faker->word,
+		'pessoa'=>\App\Client::PESSOA_FISICA
 	];
 	
 });
@@ -58,8 +59,9 @@ $factory->state(\App\Client::class, 'pessoa_juridica', function(\Faker\Generator
 	$cnpjs = cnpjs();
 
 	return [
-			'documento'=>$cnpjs[array_rand($cnpjs, 1)],
-			'fantasia'=>$faker->company
+		'documento'=>$cnpjs[array_rand($cnpjs, 1)],
+		'fantasia'=>$faker->company,
+		'pessoa'=>\App\Client::PESSOA_JURIDICA
 	];
 
 });

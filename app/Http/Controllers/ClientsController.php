@@ -40,6 +40,10 @@ class ClientsController extends Controller
 	 */
 	public function store(Requests\ClientRequest $request)
 	{
+		$data = $request->all();
+		Client::create($data);
+		return redirect()->route('clients.index');
+		
 	}
 
 	/**
