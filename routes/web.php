@@ -16,3 +16,6 @@ Route::get('/', function () {
 });
 
 Route::resource('clients', 'ClientsController', ['except'=>'show']);
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

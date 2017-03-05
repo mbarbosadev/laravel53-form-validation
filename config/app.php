@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Laravel',
+    'name' => 'SON - Laravel 5.3 - Form. e validações',
 
     /*
     |--------------------------------------------------------------------------
