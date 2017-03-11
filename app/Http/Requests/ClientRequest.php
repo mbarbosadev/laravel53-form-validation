@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Client;
 
 class ClientRequest extends FormRequest
 {
@@ -23,8 +24,16 @@ class ClientRequest extends FormRequest
      */
     public function rules()
     {
+    	$estadosCivis = implode(',', array_keys(Client::ESTADOS_CIVIS));
+    	
         return [
-            'nome'=>'required'
+            'nome'=>'required|max:20',
+        	'documento'=>'required',
+        	'email'=>'required|email',
+        	'telefone'=>'required',
+        	'data_nasc'=>'required|date',
+        	'estado_civil'=>"required|in:$estadosCivis",
+        	'sexo'=>'required|in:m,f'
         ];
     }
 }
