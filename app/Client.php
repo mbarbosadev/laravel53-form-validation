@@ -14,16 +14,51 @@ class Client extends Model
     
     const PESSOA_FISICA = 'fisica';
     const PESSOA_JURIDICA = 'juridica';
-    
-    protected $fillable = [
+
+    protected $fillableGeneral = [
     	'nome',
     	'documento',
     	'email',
     	'telefone',
-    	'inadimplente',
+    	'inadimplente'
+    ];
+        
+    protected $fillableFisica = [
     	'data_nasc',
     	'sexo',
     	'estado_civil',
     	'deficiencia_fisica'
     ];
+    
+    protected $fillableJuridica = [
+	    'fantasia
+    '];
+    
+    
+    public static function getPessoa($value) {
+    	return $value == \App\Client::PESSOA_JURIDICA ? $value : \App\Client::PESSOA_FISICA;
+    }
+    
+    protected function setFillable() {
+    	
+    	if($this->pessoa == self::PESSOA_FISICA) {
+    		$this->fillable(array_merge($this->fillableGeneral, $this->fillableFisica));
+    	} else {
+    		$this->fillable(array_merge($this->fillableGeneral, $this->fillableJuridica));
+    	}
+    	
+    }
+    
+    
+    public function fill(array $attributes) {
+    	
+    	if(!$this->pessoa) {
+    		$this->pessoa = self::getPessoa(isset($attributes['pessoa']) ? $attributes['pessoa'] : null);
+    	}
+    	
+    	$this->setFillable();
+    	
+    	return parent::fill($attributes);
+    }
+    
 }

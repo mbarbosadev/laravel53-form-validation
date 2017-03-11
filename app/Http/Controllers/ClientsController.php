@@ -30,6 +30,11 @@ class ClientsController extends Controller
 	 */
 	public function create(Request $request)
 	{
+		$paramPessoa = $request->get('pessoa');
+		
+		$pessoa = Client::getPessoa($paramPessoa);
+		
+		return view('clients.create', compact('pessoa'));
 	}
 
 	/**
@@ -41,6 +46,8 @@ class ClientsController extends Controller
 	public function store(Requests\ClientRequest $request)
 	{
 		$data = $request->all();
+		$data['pessoa'] = Client::getPessoa($request->get('pessoa'));
+		$data['inadimplente'] = false;
 		Client::create($data);
 		return redirect()->route('clients.index');
 		
